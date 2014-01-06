@@ -13,10 +13,11 @@ define([
         tagName: 'div',
         template: JST['app/scripts/templates/articleView.ejs'],
         initialize: function() {
+        	//console.log('initialazing articleView')
             this.listenTo(this.model, 'change', this.render);
         },
         render: function() {
-            //console.log('render: ' + this.model.get('title'));
+            console.log('render: ' + this.model.get('title'));
 
             var content = this.template(this.model.toJSON());
             this.$el.html(content);

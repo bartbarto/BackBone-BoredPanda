@@ -11,7 +11,15 @@ define([
         model: ArticlesModel,
         url: 'scripts/data.json',
         initialize: function() {
-           this.fetch();
+            this.fetch({
+                success: function(items) {
+                    if (items.length > 0) {
+                        console.log('Er zitten ' + items.length + ' items in de database');
+                    } else {
+                        console.log('Er zijn geen items gevonden in de database');
+                    }
+                }
+            });
         },
     });
 

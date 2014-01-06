@@ -5,8 +5,9 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'views/articleView'
-], function($, _, Backbone, JST, ArticleView) {
+    'views/articleView',
+    'models/Article'
+], function($, _, Backbone, JST, ArticleView, Article) {
     'use strict';
 
     var ArticleListing = Backbone.View.extend({
@@ -18,27 +19,10 @@ define([
 
         render: function() {
 
-            // empty out the subviews
-            // This enables us to have a _direct_ reference to the subviews in case we need it.
-            _.each(this.views, function(view) {
-                view.remove();
-            });
-            this.views = [];
-
-            // render all the children
-            this.collection.each(function(article) {
-                var view = new ArticleView({
-                    model: article
-                });
+            this.collection.each(function(Article){
+                var view =  new ArticleView({model:Article});
                 this.$el.append(view.render().el);
-
-                // keep a reference to the view.
-                // See reference we setup on l. 115
-                this.views.push(view);
-                console.log('viewRenderEind');
-                console.log(this.views);
-            }, this);
-
+            }, this)
             return this;
         }
 

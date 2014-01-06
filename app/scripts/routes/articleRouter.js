@@ -1,41 +1,58 @@
 /*global define*/
 
+
 define([
-	'jquery',
+    'jquery',
     'backbone',
     'collections/Articles',
+    'collections/emptyCollection',
     'models/Article',
     'views/articleListing',
-], function ($, Backbone, Articles, Article, ArticleListing) {
+], function($, Backbone, ArticlesCollection, emptyCollection, Article, ArticleListing) {
     'use strict';
 
     var ArticleRouter = Backbone.Router.extend({
-    routes: {
-        'search/:what': 'search',
-        'articles/:title': 'articles',
-        'category/:category': 'category',
-        '': 'index'
-    },
-    index: function() {
-    	var articles = new Articles();
-    	articles.fetch();
+        routes: {
+            'search/:what': 'search',
+            'articles/:title': 'articles',
+            'category/:category': 'category',
+            '': 'index'
+        },
+        index: function() {
 
-    	console.log(articles);
+            var articles = new ArticlesCollection();
 
-        console.log('index page', articles.length, 'items');
+            var articlesView = new ArticleListing({
+                        collection: articles
+                    });
 
-        // do stuff
-        var articlesView = new ArticleListing({
-            collection: articles
-        });
+                    var artView = $('#articles').html(articlesView.render().el)
+                    //console.log(artView);
 
-        console.log('viewie: ', articlesView);
+            // articles.fetch({
+            //     success: function(items) {
 
-        var artView = $('#articles').html(articlesView.render().el)
-        console.log(artView);
-    },
 
-});
+            //         articles.add(items);
+
+
+            //         // do stuff
+            //         var articlesView = new ArticleListing({
+            //             collection: articles
+            //         });
+
+            //         var artView = $('#articles').html(articlesView.render().el)
+            //         //console.log(artView);
+            //     }
+            // });
+
+
+        },
+        articles: function() {
+
+        }
+
+    });
 
     return ArticleRouter;
 });
