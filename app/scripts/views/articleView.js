@@ -9,15 +9,14 @@ define([
     'use strict';
 
     var ArticleView = Backbone.View.extend({
-        className: 'article-view teaser col-md-12',
+        className: 'article-view teaser col-md-12 well',
         tagName: 'div',
         template: JST['app/scripts/templates/articleView.ejs'],
         initialize: function() {
-        	//console.log('initialazing articleView')
-            this.listenTo(this.model, 'change', this.render);
+            this.listenTo(this.model, 'change sync', this.render);
         },
         render: function() {
-            console.log('render: ' + this.model.get('title'));
+            //console.log('render: ' + this.model.get('title'));
 
             var content = this.template(this.model.toJSON());
             this.$el.html(content);

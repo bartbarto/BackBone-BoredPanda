@@ -10,17 +10,18 @@ define([
     var ArticlesCollection = Backbone.Collection.extend({
         model: ArticlesModel,
         url: 'scripts/data.json',
+        comparator: function(item) {
+            return item.get(this.sort_key); // - omdat anders van laag naar hoog is //http://stackoverflow.com/questions/5013819/reverse-sort-order-with-backbone-js
+        },
         initialize: function() {
+            this.sort_key = 'id';
             this.fetch({
-                success: function(items) {
-                    if (items.length > 0) {
-                        console.log('Er zitten ' + items.length + ' items in de database');
-                    } else {
-                        console.log('Er zijn geen items gevonden in de database');
-                    }
+                success: function(items, response) {
+                    //fetched !!
                 }
             });
         },
+
     });
 
     return ArticlesCollection;

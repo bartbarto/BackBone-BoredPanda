@@ -1,0 +1,21 @@
+ <a class="btn btn-primary navigate" href="#">Go back</a>
+
+<br><br>
+<h4><%= title %></h4>
+<h6 class="text-muted">by <%= author %>,&nbsp; <%= publishedDate %></h6>
+<p><%= content %></p>
+<p>Rating:
+<% for (var i = 0; i < rating; i++) { %>
+	&#9733;
+<%}; for (var i = 0; i < 5-rating; i++) { %>
+	&#9734;
+<% };%>
+</p>
+
+<strong>Categorieën:</strong>
+	<% for (var i = categories.length - 1; i >= 0; i--) { %>
+	    <a href="#category/<%= categories[i] %>"><%= categories[i] %></a>,
+	<%};%>
+<br><br>
+<a class="btn btn-primary navigate" href="#">Go back</a>
+<br>

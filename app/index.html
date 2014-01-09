@@ -32,17 +32,44 @@
             <ul class="nav nav-pills pull-right">
                 <li class="active"><a href="#">Home</a>
                 </li>
+                <li><a href="#popular">Populair</a>
+                </li>
+                <li>
+                     <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <select class="form-control pull-left" name="sort-by" id="sort-by" style="max-width:200px; ">
+                                <option disabled="true" selected="true">Sorteer...</option>
+                                <option value="title">Sorteer op titel</option>
+                                <option value="rating">Sorteer op rating</option>
+                                <option value="author">Sorteer op auteur</option>
+                            </select>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <form class="navbar-form navbar-left" role="search" style="max-width:220px;" id="search-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="search" id="search-text">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
             </ul>
-            <h3 class="text-muted">Bored Panda RSS • BackBone</h3>
+
+            <h3 class="text-muted">Bored Panda • BackBone</h3>
         </div>
         <div id="articles">
 
         </div>
 
-        <div class="footer">
-            <p>© Bart Van Itterbeeck</p>
-        </div>
-
+    </div>
+    <br>
+    <div class="footer container">
+        <small>© Bart Van Itterbeeck - 3MCT Web&amp;UX - Karel de Grote Hogeschool - Examen Web Development P2 - 2014</small>
     </div>
 
 

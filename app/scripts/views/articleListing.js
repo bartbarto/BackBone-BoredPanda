@@ -13,8 +13,7 @@ define([
     var ArticleListing = Backbone.View.extend({
         initialize: function() {
             this.views = [];
-            this.listenTo(this.collection, 'reset', this.render, this);
-            this.listenTo(this.collection, 'sort', this.render, this);
+            this.listenTo(this.collection, 'sync change sort', this.render, this);
         },
 
         render: function() {
