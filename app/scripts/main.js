@@ -29,10 +29,11 @@ require.config({
 window.App = {};
 
 require([
-    'underscore', 'backbone', 'routes/articleRouter'
-], function(_, Backbone, ArticleRouter) {
+    'underscore', 'backbone', 'routes/articleRouter', 'collections/categories'
+], function(_, Backbone, ArticleRouter, categoriesCollection) {
 
     var router = new ArticleRouter();
+    new categoriesCollection();
 
     Backbone.history.start();
 
@@ -43,21 +44,29 @@ require([
         });
     });
 
-    $('#search-form').on('submit', function(e){
+    $('#search-form').on('submit', function(e) {
         e.preventDefault();
 
         $('ul.nav li').removeClass('active');
 
         var query = $('#search-text').val();
 
-        window.location.hash = "search/"+query;
+        window.location.hash = "search/" + query;
     });
 
-    $('#sort-by').on('change', function(e){
+    $('#sort-by').on('change', function(e) {
 
         var optionSelected = $("option:selected", this);
         var valueSelected = this.value;
-         window.location.hash = valueSelected;
+        window.location.hash = valueSelected;
 
     });
 });
+
+function inArray(needle, haystack) {
+    var length = haystack.length;
+    for (var i = 0; i < length; i++) {
+        if (haystack[i] == needle) return true;
+    }
+    return false;
+}

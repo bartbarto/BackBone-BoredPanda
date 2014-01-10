@@ -146,10 +146,54 @@ define([
             })
         },
         category: function(cat){
-        	var catCol = new CategoriesCollection();
+        	console.log('categorie: ', cat);
 
-        	console.log(catCol);
-        }
+        	// if(App.categories){
+        	// 	console.log(App.categories);
+        	// }
+        	// var x = new CategoriesCollection();
+        	// x.listenTo
+
+        	// x.on('all', function(event) {
+        	// 	console.log(x);
+        	// });
+
+        	// for (var i = 0; i < App.categories.models.length; i++) {
+        	// 	console.log(i)
+        	// };
+        	if (!articles) {
+                    var articles = new ArticlesCollection();
+                };
+
+                articles.on('sort', function(e) { //collections get automatically sorted after initialisation
+
+                        var query_encoded = cat;
+
+                        var query = decodeURIComponent(query_encoded.replace(/\+/g, "%20"));
+
+                        var foundCollection =  new emptyCollection();
+
+                        console.log(articles);
+
+                        for (var i = 0; i < articles.length; i++) {
+                        	for (var j = 0; j < articles.models[i].attributes.categories.length; j++) {
+
+                        		if(articles.models[i].attributes.categories[j] == cat){
+                        			console.log(articles.models[i].attributes.categories[j], '->',j);
+                        			foundCollection.add(articles.models[i])
+                        		};
+                        	};
+                        };
+
+
+                        var searchView = new ArticleListing({
+                            collection: foundCollection
+                        });
+
+                        $('#articles').html(searchView.render().el);
+                        $('body').scrollTop(0);
+                    })
+        } ///end cate cont
 
     });
 

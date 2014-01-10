@@ -1,19 +1,21 @@
 /*global define*/
 
 define([
+	'jquery',
     'underscore',
     'backbone',
     'collections/Articles',
     'collections/emptyCollection'
-], function(_, Backbone, articlesCollection, emptyCollection) {
+], function($, _, Backbone, articlesCollection, emptyCollection) {
     'use strict';
 
     var CategoriesCollection = Backbone.Collection.extend({
+    	comparator: 'title',
         initialize: function() {
             var articles = new articlesCollection();
             var categoryArray = new Array();
 
-            articles.on('sort', function() {
+            var returnval = articles.on('sort', function() {
 
                 for (var i = 0; i < articles.models.length; i++) {
 
@@ -29,6 +31,8 @@ define([
                 var categoriesFilled = new emptyCollection();
                 categoriesFilled.add(categoryArray);
 
+                App.categories = categoriesFilled;
+
                 return categoriesFilled;
             })
 
@@ -40,7 +44,8 @@ define([
                 return false;
             }
 
-
+            this.sort();
+            return returnval;
         },
     });
 
