@@ -21,6 +21,7 @@ define([
             'articles/:title': 'articlesController',
             'popular': 'popular',
             'category/:category': 'category',
+            'categories': 'categoriesList',
             ':sort': 'sortItems',
             '': 'index'
         },
@@ -145,55 +146,96 @@ define([
 
             })
         },
-        category: function(cat){
-        	console.log('categorie: ', cat);
+        category: function(cat) {
+            console.log('categorie: ', cat);
+            if (!articles) {
+                var articles = new ArticlesCollection();
+            };
 
-        	// if(App.categories){
-        	// 	console.log(App.categories);
-        	// }
-        	// var x = new CategoriesCollection();
-        	// x.listenTo
+            articles.on('sort', function(e) { //collections get automatically sorted after initialisation
 
-        	// x.on('all', function(event) {
-        	// 	console.log(x);
-        	// });
+                var query_encoded = cat;
 
-        	// for (var i = 0; i < App.categories.models.length; i++) {
-        	// 	console.log(i)
-        	// };
-        	if (!articles) {
-                    var articles = new ArticlesCollection();
+                var query = decodeURIComponent(query_encoded.replace(/\+/g, "%20"));
+
+                var foundCollection = new emptyCollection();
+
+                console.log(articles);
+
+                for (var i = 0; i < articles.length; i++) {
+                    for (var j = 0; j < articles.models[i].attributes.categories.length; j++) {
+
+                        if (articles.models[i].attributes.categories[j] == cat) {
+                            console.log(articles.models[i].attributes.categories[j], '->', j);
+                            foundCollection.add(articles.models[i])
+                        };
+                    };
                 };
 
-                articles.on('sort', function(e) { //collections get automatically sorted after initialisation
 
-                        var query_encoded = cat;
+                var searchView = new ArticleListing({
+                    collection: foundCollection
+                });
 
-                        var query = decodeURIComponent(query_encoded.replace(/\+/g, "%20"));
+                $('#articles').html(searchView.render().el);
+                $('body').scrollTop(0);
+            })
+        },
+        categoriesList: function() {
 
-                        var foundCollection =  new emptyCollection();
+            console.warn('categories listing initialzing');
 
-                        console.log(articles);
+            var articles = new ArticlesCollection();
+            var categoryArray = new Array();
 
-                        for (var i = 0; i < articles.length; i++) {
-                        	for (var j = 0; j < articles.models[i].attributes.categories.length; j++) {
+            articles.on('sort', function() {
 
-                        		if(articles.models[i].attributes.categories[j] == cat){
-                        			console.log(articles.models[i].attributes.categories[j], '->',j);
-                        			foundCollection.add(articles.models[i])
-                        		};
-                        	};
+                for (var i = 0; i < articles.models.length; i++) {
+
+                    for (var j = 0; j < articles.models[i].attributes.categories.length; j++) {
+
+                        if (!inArray(articles.models[i].attributes.categories[j], categoryArray)) {
+                            categoryArray.push(articles.models[i].attributes.categories[j])
                         };
+                    };
+
+                };
+
+                // var categoriesFilled = new emptyCollection(); //om er een collectie van te maken
+                // categoriesFilled.add(categoryArray);			 //hier ook
 
 
-                        var searchView = new ArticleListing({
-                            collection: foundCollection
-                        });
+                // $('#articles').html(categoryView.render().el);
+                $('#articles').html(formPrettyString(categoryArray));
+                $('body').scrollTop(0);
 
-                        $('#articles').html(searchView.render().el);
-                        $('body').scrollTop(0);
-                    })
-        } ///end cate cont
+
+            })
+
+            function inArray(needle, haystack) {
+                var length = haystack.length;
+                for (var i = 0; i < length; i++) {
+                    if (haystack[i] == needle) return true;
+                }
+                return false;
+            }
+
+            function formPrettyString(array){
+            	var returnStr ='';
+            	returnStr += '<div class="row">';
+            	for (var i = 0; i < array.length; i++) {
+            		returnStr += '<div class="col-sm-3" style="margin-bottom:10px;">'
+            		returnStr += '<a class="btn btn-primary btn-sm" style="width:95%;" href="#category/';
+            		returnStr += array[i];
+            		returnStr += '">';
+            		returnStr += array[i];
+            		returnStr += '</a></div>';
+            	};
+            	returnStr += '</div>'
+            	return returnStr;
+            }
+
+        },
 
     });
 

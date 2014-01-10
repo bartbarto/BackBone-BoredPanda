@@ -31,7 +31,11 @@ define([
                 var categoriesFilled = new emptyCollection();
                 categoriesFilled.add(categoryArray);
 
+                this.models.push(categoryArray);
+
                 App.categories = categoriesFilled;
+
+                console.error('categoriesFilled:', categoriesFilled);
 
                 return categoriesFilled;
             })
@@ -45,7 +49,7 @@ define([
             }
 
             this.sort();
-            return returnval;
+            return this.models;
         },
     });
 
