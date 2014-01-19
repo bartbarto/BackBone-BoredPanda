@@ -1,0 +1,15 @@
+ <h4><%= title %></h4>
+ <h6 class="text-muted">by <%= author %> -
+<% for (var i = 0; i < rating; i++) { %>
+	&#9733;
+<%}; for (var i = 0; i < 5-rating; i++) { %>
+	&#9734;
+<% };%>
+</h6>
+
+ <p><%= contentSnippet %></p>
+ <div class="pull-right">
+     <a href="<%= link %>">&rarr; Read on website &larr; </a>&nbsp;
+     <a class="btn btn-primary navigate" href="#articles/<%= id %>">Read More...</a>
+ </div>
+ <br>

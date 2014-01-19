@@ -1,0 +1,95 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BackBone Bored Panda</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="styles/5b4e919b.main.css">
+    <script src="scripts/vendor/d7100892.modernizr.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <div class="container">
+        <div class="header">
+            <ul class="nav nav-pills pull-right">
+                <li class="active"><a href="#">Home</a>
+                </li>
+                <li><a href="#popular">Populair</a>
+                </li>
+                <li><a href="#categories">Categorieën</a>
+                </li>
+                <li>
+                     <form class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <select class="form-control pull-left" name="sort-by" id="sort-by" style="max-width:200px">
+                                <option disabled="true" selected="true">Sorteer...</option>
+                                <option value="title">Sorteer op titel</option>
+                                <option value="rating">Sorteer op rating</option>
+                                <option value="author">Sorteer op auteur</option>
+                            </select>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <form class="navbar-form navbar-left" role="search" style="max-width:220px" id="search-form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search" name="search" id="search-text">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+            </ul>
+
+            <h3 class="text-muted">Bored Panda • BackBone</h3>
+        </div>
+        <div id="articles">
+
+        </div>
+
+    </div>
+    <br>
+    <div class="footer container">
+        <small>© Bart Van Itterbeeck - 3MCT Web&amp;UX - Karel de Grote Hogeschool - Examen Web Development P2 - 2014</small>
+    </div>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script>
+    (function(b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+            function() {
+                (b[l].q = b[l].q || []).push(arguments)
+            });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+    </script>
+
+    <script data-main="scripts/33f0aa72.main" src="bower_components/requirejs/require.js"></script>
+</body>
+
+</html>
