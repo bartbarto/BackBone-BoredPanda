@@ -67,7 +67,7 @@ define([
                 var articles = new ArticlesCollection();
             };
 
-            articles.on('sort', function(e) { //collections get automatically sorted after initialisation
+            articles.on('sort', function(e) {
 
                 var popular = articles.where({
                     "rating": 5
@@ -92,7 +92,7 @@ define([
                 var articles = new ArticlesCollection();
             };
 
-            articles.on('sort', function(e) { //collections get automatically sorted after initialisation
+            articles.on('sort', function(e) {
 
                 var query_encoded = url_query;
 
@@ -152,7 +152,7 @@ define([
                 var articles = new ArticlesCollection();
             };
 
-            articles.on('sort', function(e) { //collections get automatically sorted after initialisation
+            articles.on('sort', function(e) {
 
                 var query_encoded = cat;
 
